@@ -1,0 +1,13 @@
+{
+    "name": "ClubHouse",
+    "alias": "clubhouse",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ClubHouse\\Providers\\ClubHouseServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "NavigationMenu",
+    "alias": "navigationmenu",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\NavigationMenu\\Providers\\NavigationMenuServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

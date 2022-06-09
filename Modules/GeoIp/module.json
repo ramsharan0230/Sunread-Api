@@ -1,0 +1,13 @@
+{
+    "name": "GeoIp",
+    "alias": "geoip",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\GeoIp\\Providers\\GeoIpServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

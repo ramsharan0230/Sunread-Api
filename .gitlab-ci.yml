@@ -1,0 +1,105 @@
+stages:
+  - preparation
+  - building
+  - testing
+
+image: edbizarro/gitlab-ci-pipeline-php:8.0
+
+# Variables
+variables:
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_USER: mysql_user
+  MYSQL_PASSWORD: mysql_password
+  MYSQL_DATABASE: mysql_db
+  DB_HOST: mysql
+  DB_PASSWORD: mysql_password
+  DB_DATABASE: mysql_db
+  DB_USERNAME: mysql_user
+  ELASTIC_HOST: 94.237.111.68
+  ELASTIC_PREFIX: sail_racing_store_
+  QUEUE_CONNECTION: database
+  APP_ENV: ci
+  REDIS_HOST: 94.237.40.213
+  REDIS_PASSWORD: Hdl@Hz876!
+  MAIL_MAILER: smtp
+  MAIL_HOST: smtp.mailtrap.io
+  MAIL_PORT: 2525
+  MAIL_USERNAME: 05c07fd4606b33
+  MAIL_PASSWORD: be036c610b861a
+  MAIL_ENCRYPTION: tls
+  MAIL_FROM_ADDRESS: support@example.com
+  MAIL_FROM_NAME: SailRacing
+
+cache:
+  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+
+composer:
+  stage: preparation
+  script:
+    - php -v
+    - export COMPOSER_MEMORY_LIMIT=-1
+    - composer install --ignore-platform-reqs --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.example .env
+    - php artisan key:generate
+    - php artisan jwt:secret --force
+  artifacts:
+    paths:
+      - vendor/
+      - .env
+    expire_in: 1 days
+    when: always
+  cache:
+    paths:
+      - vendor/
+
+db-seeding:
+  stage: building
+  services:
+    - name: mysql:8.0
+      command: ["--default-authentication-plugin=mysql_native_password"]
+  # Download the artifacts for these jobs
+  dependencies:
+    - composer
+  script:
+    - mysql --version
+    - php artisan migrate:fresh --seed
+    - mysqldump --host="${DB_HOST}" --user="${MYSQL_USER}" --password="${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" --no-tablespaces > db.sql
+  artifacts:
+    paths:
+      - storage/logs # for debugging
+      - db.sql
+    expire_in: 1 days
+    when: always
+
+phpunit:
+  stage: testing
+  services:
+    - name: mysql:8.0
+      command: ["--default-authentication-plugin=mysql_native_password"]
+  # Download the artifacts for these jobs
+  dependencies:
+    - composer
+    - db-seeding
+  script:
+    - php -v
+    - sudo cp /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.bak
+    - echo "" | sudo tee /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    - mysql --host="${DB_HOST}" --user="${MYSQL_USER}" --password="${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" < db.sql
+    - ./vendor/phpunit/phpunit/phpunit --version
+    - php artisan test
+    - sudo cp /usr/local/etc/php/conf.d/docker-php-ext-xdebug.bak /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  artifacts:
+    paths:
+      - ./storage/logs # for debugging
+    expire_in: 1 days
+    when: on_failure
+
+phpcpd:
+  stage: testing
+  script:
+    - test -f phpcpd.phar || curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar
+    - php phpcpd.phar app/ --min-lines=50
+  dependencies: []
+  cache:
+    paths:
+      - phpcpd.phar

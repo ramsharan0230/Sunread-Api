@@ -1,0 +1,13 @@
+{
+    "name": "DeliveryFreeShipping",
+    "alias": "deliveryfreeshipping",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\DeliveryFreeShipping\\Providers\\DeliveryFreeShippingServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

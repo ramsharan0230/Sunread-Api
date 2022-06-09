@@ -1,0 +1,13 @@
+{
+    "name": "PaymentKlarna",
+    "alias": "paymentklarna",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PaymentKlarna\\Providers\\PaymentKlarnaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,13 @@
+{
+    "name": "PaymentCashOnDelivery",
+    "alias": "paymentcashondelivery",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PaymentCashOnDelivery\\Providers\\PaymentCashOnDeliveryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

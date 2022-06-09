@@ -1,0 +1,15 @@
+{
+    "name": "Notification",
+    "alias": "notification",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Notification\\Providers\\NotificationServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "Helper/helper.php"
+    ],
+    "requires": []
+}

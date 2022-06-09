@@ -1,0 +1,13 @@
+{
+    "name": "DeliveryFlatRate",
+    "alias": "deliveryflatrate",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\DeliveryFlatRate\\Providers\\DeliveryFlatRateServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

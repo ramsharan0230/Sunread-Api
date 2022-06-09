@@ -1,0 +1,13 @@
+{
+    "name": "CheckOutMethods",
+    "alias": "checkoutmethods",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CheckOutMethods\\Providers\\CheckOutMethodsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

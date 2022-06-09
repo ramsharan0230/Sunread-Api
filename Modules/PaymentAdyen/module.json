@@ -1,0 +1,13 @@
+{
+    "name": "PaymentAdyen",
+    "alias": "paymentadyen",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PaymentAdyen\\Providers\\PaymentAdyenServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

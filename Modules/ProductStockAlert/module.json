@@ -1,0 +1,13 @@
+{
+    "name": "ProductStockAlert",
+    "alias": "productstockalert",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ProductStockAlert\\Providers\\ProductStockAlertServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

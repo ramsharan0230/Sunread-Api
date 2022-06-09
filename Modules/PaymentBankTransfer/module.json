@@ -1,0 +1,13 @@
+{
+    "name": "PaymentBankTransfer",
+    "alias": "paymentbanktransfer",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PaymentBankTransfer\\Providers\\PaymentBankTransferServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

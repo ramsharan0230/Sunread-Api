@@ -1,0 +1,4 @@
+<style>
+    {!! $style !!}
+</style>
+{!! $details !!}
